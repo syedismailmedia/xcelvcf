@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel to VCF Converter</title>
+    <meta name="description" content="Convert Excel files to VCF format easily with our free online tool. Download your contacts in VCF format for easy import into mobile devices.">
+    <meta name="keywords" content="Excel to VCF, convert Excel to VCF, VCF converter, contact export, Excel contacts to VCF">
+    <meta name="author" content="Excel to VCF Tool">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Excel to VCF Converter",
+            "url": "https://yourwebsite.com"
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How to use the Excel to VCF Converter?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Simply upload your Excel file and click the Convert & Download button to get your VCF file."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is this tool free to use?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, our tool is completely free to use with no hidden charges."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I use this tool on mobile?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, our website is fully responsive and works on both mobile and desktop devices."
+                    }
+                }
+            ]
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .header, .footer {
+            background: #333;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .nav {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+        .nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        input, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer a {
+                margin-top: 5px;
+            }
+            .nav {
+                position: static;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Excel to VCF</h1>
+        <div class="nav">
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Excel to VCF Converter</h2>
+        <p>Convert your Excel contacts into VCF format quickly and easily. Simply upload your file and download the VCF.</p>
+        <input type="file" id="fileInput" accept=".xls,.xlsx">
+        <button onclick="convertToVCF()">Convert & Download VCF</button>
+    </div>
+
+    <div class="footer">
+        <span>&copy; 2025 xcelvcf.keywordsfromurls.com</span>
+        <div>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+
+    <script>
+        function convertToVCF() {
+            const fileInput = document.getElementById('fileInput').files[0];
+            if (!fileInput) {
+                alert("Please upload an Excel file");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+                let vcfContent = "";
+                jsonData.forEach(contact => {
+                    let name = contact.Name || "Unknown";
+                    let phone = contact.Phone || "";
+                    let email = contact.Email || "";
+
+                    vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD\n`;
+                });
+
+                const blob = new Blob([vcfContent], { type: 'text/vcard' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = "contacts.vcf";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+            reader.readAsArrayBuffer(fileInput);
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel to VCF Converter</title>
+    <meta name="description" content="Convert Excel files to VCF format easily with our free online tool. Download your contacts in VCF format for easy import into mobile devices.">
+    <meta name="keywords" content="Excel to VCF, convert Excel to VCF, VCF converter, contact export, Excel contacts to VCF">
+    <meta name="author" content="Excel to VCF Tool">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Excel to VCF Converter",
+            "url": "https://yourwebsite.com"
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How to use the Excel to VCF Converter?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Simply upload your Excel file and click the Convert & Download button to get your VCF file."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is this tool free to use?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, our tool is completely free to use with no hidden charges."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I use this tool on mobile?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, our website is fully responsive and works on both mobile and desktop devices."
+                    }
+                }
+            ]
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .header, .footer {
+            background: #333;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .nav {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+        .nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        input, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer a {
+                margin-top: 5px;
+            }
+            .nav {
+                position: static;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Excel to VCF</h1>
+        <div class="nav">
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Excel to VCF Converter</h2>
+        <p>Convert your Excel contacts into VCF format quickly and easily. Simply upload your file and download the VCF.</p>
+        <input type="file" id="fileInput" accept=".xls,.xlsx">
+        <button onclick="convertToVCF()">Convert & Download VCF</button>
+    </div>
+
+    <div class="footer">
+        <span>&copy; 2025 xcelvcf.keywordsfromurls.com</span>
+        <div>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+
+    <script>
+        function convertToVCF() {
+            const fileInput = document.getElementById('fileInput').files[0];
+            if (!fileInput) {
+                alert("Please upload an Excel file");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+                let vcfContent = "";
+                jsonData.forEach(contact => {
+                    let name = contact.Name || "Unknown";
+                    let phone = contact.Phone || "";
+                    let email = contact.Email || "";
+
+                    vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD\n`;
+                });
+
+                const blob = new Blob([vcfContent], { type: 'text/vcard' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = "contacts.vcf";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+            reader.readAsArrayBuffer(fileInput);
+        }
+    </script>
+</body>
+</html>
