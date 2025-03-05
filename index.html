@@ -61,21 +61,6 @@
             padding: 15px 20px;
             text-align: center;
         }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        .nav {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-        }
-        .nav a {
-            color: white;
-            margin: 0 10px;
-            text-decoration: none;
-            font-size: 16px;
-        }
         .container {
             max-width: 500px;
             margin: auto;
@@ -104,41 +89,23 @@
         button:hover {
             background-color: #218838;
         }
-        .footer {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .faq {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: left;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .footer a {
-            color: white;
-            text-decoration: none;
-        }
-        @media (max-width: 600px) {
-            .container {
-                width: 90%;
-            }
-            .footer {
-                flex-direction: column;
-                text-align: center;
-            }
-            .footer a {
-                margin-top: 5px;
-            }
-            .nav {
-                position: static;
-                margin-top: 10px;
-            }
+        .faq h3 {
+            color: #333;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Excel to VCF</h1>
-        <div class="nav">
-            <a href="#">About Us</a>
-            <a href="#">Contact Us</a>
-        </div>
     </div>
 
     <div class="container">
@@ -148,12 +115,18 @@
         <button onclick="convertToVCF()">Convert & Download VCF</button>
     </div>
 
+    <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <h3>How to use the Excel to VCF Converter?</h3>
+        <p>Simply upload your Excel file and click the Convert & Download button to get your VCF file.</p>
+        <h3>Is this tool free to use?</h3>
+        <p>Yes, our tool is completely free to use with no hidden charges.</p>
+        <h3>Can I use this tool on mobile?</h3>
+        <p>Yes, our website is fully responsive and works on both mobile and desktop devices.</p>
+    </div>
+
     <div class="footer">
         <span>&copy; 2025 xcelvcf.keywordsfromurls.com</span>
-        <div>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Privacy Policy</a>
-        </div>
     </div>
 
     <script>
