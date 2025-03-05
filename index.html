@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,18 +50,83 @@
         }
     </script>
     <style>
+         /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-            background-color: #f4f4f4;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f9;
         }
-        .header, .footer {
-            background: #333;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-        }
+
+     /* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #007BFF;
+    color: white;
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header nav {
+    display: flex;
+    gap: 15px;
+}
+
+.header nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.header nav a:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header nav {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .header nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .header .logo {
+        font-size: 20px;
+    }
+
+    .header nav a {
+        font-size: 14px;
+        padding: 10px 5px;
+    }
+}
+
         .container {
             max-width: 500px;
             margin: auto;
@@ -80,14 +146,94 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        button {
-            background-color: #28a745;
+           /* Footer */
+        .footer {
+            background-color: #007BFF;
             color: white;
-            border: none;
-            cursor: pointer;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
-        button:hover {
-            background-color: #218838;
+
+        .footer .left {
+            font-size: 14px;
+        }
+
+        .footer .right {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer .right a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer .right a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .categories {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .tool-container textarea {
+                height: 150px;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer .right {
+                flex-direction: column;
+            }
+            p {
+                text-align: center;
+                font-size: 1rem;
+                margin-top: 20px;
+            }
+        }
+
+        /* Container to center the section */
+        .share-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        /* Flexbox for share icons */
+        .share-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .share-icons a {
+            color: #333;
+            font-size: 24px;
+            text-decoration: none;
+             padding: 0 5px;
+        }
+
+        .share-icons a:hover {
+            color: #007BFF;
         }
         .faq {
             max-width: 600px;
@@ -102,14 +248,35 @@
             color: #333;
         }
     </style>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Keywords from urls Extractor from sitemap Tool",
+  "url": "",
+  "description": "",
+  "mainEntityOfPage": "",
+  "potentialAction": {
+    "@type": "Action",
+    "name": "Extract Keywords",
+    "target": "",
+    "actionStatus": "ActiveActionStatus"
+  }
+}
+</script>
+   
 </head>
+<br>
 <body>
-    <div class="header">
-        <h1>Excel to VCF</h1>
-    </div>
-
+ <header class="header">
+        <div class="logo">Excel To vcf </div>
+        <nav>
+            <a href="https://keywordsfromurls.com/">Home</a>
+              <a href="" target="_blank">About Us</a>
+            <a href="" target="_blank">Contact Us</a>
+          </header>
     <div class="container">
-        <h2>Excel to VCF Converter</h2>
+        <h1>Excel to VCF converter </h1>
         <p>Convert your Excel contacts into VCF format quickly and easily. Simply upload your file and download the VCF.</p>
         <input type="file" id="fileInput" accept=".xls,.xlsx">
         <button onclick="convertToVCF()">Convert & Download VCF</button>
@@ -166,4 +333,13 @@
         }
     </script>
 </body>
+    <footer class="footer"><div class="left">&copy; 2025 
+        <div class="right">
+            <a href="about-us.html" target="_blank">About Us</a>
+            <a href="contact-us.html" target="_blank">Contact Us</a>
+            <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+            <a href="Disclaimer.html" target="_blank">Disclaimer</a>
+            <a href="Terms&condition.html" target="_blank">Terms&condition</a>
+        </div>
+    </footer>
 </html>
